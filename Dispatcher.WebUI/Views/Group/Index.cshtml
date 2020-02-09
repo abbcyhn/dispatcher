@@ -1,0 +1,45 @@
+﻿@using Dispatcher.Entity.Entities
+@model List<Group>
+
+@{
+    ViewBag.Title = "Qruplar";
+
+    ViewBag.BackUrlVisibility = true;
+    ViewBag.BackUrl = Url.Action("StudentAndGroup", "Home");
+
+    Layout = "~/Views/Shared/_Table.cshtml";
+    ViewBag.AddUrl = Url.Action("Add", "Group");
+}
+
+
+
+@section THead{
+    <th>Qrupun adı</th>
+    <th>Kursun nömrəsi</th>
+    <th>Qrupdakı tələbələrin sayı</th>
+}
+
+@section TBody{
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var m = Model[i];
+
+        <tr>
+            <td>@(i + 1)</td>
+            <td>@m.Name</td>
+            <td>@m.Course.Name</td>
+            <td>@m.Students.Count</td>
+            <td class="center">
+                <a class="btn btn-info" href="@Url.Action("Edit", "Group", new { id = m.Id })">
+                    <i class="halflings-icon white edit"></i>
+                </a>
+                <form id="form_@m.Id" action="@Url.Action("Delete", "Group")" method="post" class="form-display">
+                    <input name="id" value="@m.Id" type="number" class="hidden-input" />
+                    <button class="btn btn-danger" type="button" onclick="ShowDialogConfirm('form_@m.Id')">
+                        <i class="halflings-icon white trash"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+}

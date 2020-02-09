@@ -1,0 +1,68 @@
+﻿@using Dispatcher.WebUI.Models.Student
+@model StudentAddOrEditModel
+
+@{
+    ViewBag.Title = "Qruplar";
+
+    ViewBag.BackUrlVisibility = true;
+    ViewBag.BackUrl = Url.Action("Index", "Student");
+}
+
+@section Scripts{
+    <script src="~/Content/Scripts/validations/studentvalidation.js"></script>
+}
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-content">
+            <form id="studentForm" class="form-horizontal" action="@Model.PostUrl" method="post">
+                <fieldset>
+                    <!--Student Id-->
+                    <input name="StudentModel.Id" value="@Model.Student.Id" hidden class="hide" />
+
+                    <!--Student Name-->
+                    <div class="control-group">
+                        <label class="control-label">Tələbənin adı</label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" type="text" name="StudentModel.Name" value="@Model.Student.Name">
+                        </div>
+                    </div>
+
+                    <!--Student Surname-->
+                    <div class="control-group">
+                        <label class="control-label">Tələbənin soyadı</label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" type="text" name="StudentModel.Surname" value="@Model.Student.Surname">
+                        </div>
+                    </div>
+
+                    <!--Student Patronymic-->
+                    <div class="control-group">
+                        <label class="control-label">Tələbənin ata adı</label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" type="text" name="StudentModel.Patronymic" value="@Model.Student.Patronymic">
+                        </div>
+                    </div>
+
+                    <!--Student Group-->
+                    <div class="control-group">
+                        <label class="control-label">Qrupun nömrəsi</label>
+                        <div class="controls">
+                            <select id="teachers" data-rel="chosen" name="StudentModel.GroupId">
+                                @foreach (var gm in Model.GroupModels)
+                                {
+                                    <option @gm.Selected value="@gm.Model.Id">@gm.Model.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Yadda Saxla</button>
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+</div>

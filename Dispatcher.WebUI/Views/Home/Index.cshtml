@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Əsas Səhifə";
+    ViewBag.BackUrlVisibility = false;
+}
+
+
+
+<div class="row-fluid">
+    <a class="quick-button metro blue span4" href="@Url.Action("Index", "Teacher")">
+        <img src="~/Content/Images/teacher.png" class="white-icon" />
+        <p>MÜƏLLİM(Ə)LƏR</p>
+    </a>
+    <a class="quick-button metro blue span4" href="@Url.Action("StudentAndGroup", "Home")">
+        <img src="~/Content/Images/student.png" class="white-icon" />
+        <p>QRUPLAR VƏ TƏLƏBƏLƏR</p>
+    </a>
+    <a class="quick-button metro blue span4" href="@Url.Action("Index", "Lesson")">
+        <img src="~/Content/Images/lesson.png" class="white-icon" />
+        <p>FƏNNLƏR</p>
+    </a>
+
+    <div class="clearfix"></div>
+</div>
+<div class="row-fluid" style="margin-top:50px;">
+    <a class="quick-button metro blue span4" href="@Url.Action("Index", "Room")">
+        <img src="~/Content/Images/room.png" class="white-icon" />
+        <p>OTAQLAR</p>
+    </a>
+    <a class="quick-button metro blue span4" href="@Url.Action("Index", "LessonRoomRegister")">
+        <img src="~/Content/Images/registr_lesson_room.png" class="white-icon" />
+        <p>DƏRS OTAQLARI REYESTRİ</p>
+    </a>
+    <a class="quick-button metro blue span4" href="@Url.Action("Index", "ExamRoomRegister")">
+        <img src="~/Content/Images/registr_exam_room.png" class="white-icon" />
+        <p>İMTAHAN OTAQLARI REYESTRİ</p>
+    </a>
+    <div class="clearfix"></div>
+</div>

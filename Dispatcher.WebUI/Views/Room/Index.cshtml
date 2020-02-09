@@ -1,0 +1,47 @@
+﻿@using Dispatcher.Entity.Entities
+@model List<Room>
+
+@{
+    ViewBag.Title = "Otaqlar";
+
+    ViewBag.BackUrlVisibility = true;
+    ViewBag.BackUrl = Url.Action("Index", "Home");
+
+    Layout = "~/Views/Shared/_Table.cshtml";
+    ViewBag.AddUrl = Url.Action("Add", "Room");
+}
+
+
+@section THead{
+    <th>Otağın nömrəsi</th>
+    <th>Otağın növü</th>
+    <th>Tələbə tutumu</th>
+    <th>Yerləşdiyi korpus</th>
+}
+
+
+@section TBody{
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var m = Model[i];
+
+        <tr>
+            <td>@(i + 1)</td>
+            <td>@m.Name</td>
+            <td>@m.RoomType.Name</td>
+            <td>@m.Capacity</td>
+            <td>@m.Building.Description</td>
+            <td class="center">
+                <a class="btn btn-info" href="@Url.Action("Edit", "Room", new { id = m.Id })">
+                    <i class="halflings-icon white edit"></i>
+                </a>
+                <form id="form_@m.Id" action="@Url.Action("Delete", "Room")" method="post" class="form-display">
+                    <input name="id" value="@m.Id" type="number" class="hidden-input" />
+                    <button class="btn btn-danger" type="button" onclick="ShowDialogConfirm('form_@m.Id')">
+                        <i class="halflings-icon white trash"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+}

@@ -1,0 +1,135 @@
+﻿@using Dispatcher.WebUI.Models.LessonRoomRegister
+@model LRRegisterAddOrEditModel
+
+@{
+    ViewBag.Title = "Dərs otaqları reyestri";
+
+    ViewBag.BackUrlVisibility = true;
+    ViewBag.BackUrl = Url.Action("Index", "LessonRoomRegister");
+}
+
+@section Scripts{
+    <script>
+        $.ajaxSettings.traditional = true;
+        var teachersUrl = '@Url.Action("GetTeachers", "Library")';
+        var roomsUrl = '@Url.Action("GetAvailableRooms", "Library")';
+        var isRoomAndTeacherAvailableUrl = '@Url.Action("IsRoomAndTeacherAvailableForLR", "Library")';
+    </script>
+    @Scripts.Render("~/Content/Scripts/LessonRoomRegisterScripts")
+}
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-content">
+            <form id="lrForm" class="form-horizontal" action="@Model.PostUrl" method="post">
+                <fieldset>
+                    <!--LR Id-->
+                    <input id="ModelId" name="LRModel.Id" value="@Model.LRRegister.Id" hidden class="hide" />
+
+                    <!--LR Group-->
+                    <div id="groups_chzn_main" class="control-group">
+                        <label class="control-label">Qruplar</label>
+                        <div class="controls">
+                            <select id="groups" data-rel="chosen" multiple="multiple" name="LRModel.GroupIds[]">
+                                @foreach (var m in Model.GroupModels)
+                                {
+                                    <option @m.Selected value="@m.Model.Id">@m.Model.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <!--LR Room-->
+                    <div class="control-group">
+                        <label class="control-label">Dərs otağı</label>
+                        <div id="rooms" class="controls">
+                            <select id="ModelRoomId" data-rel="chosen" name="LRModel.RoomId">
+                                @foreach (var m in Model.RoomModels)
+                                {
+                                    <option @m.Selected value="@m.Model.Id">@m.Model.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <!--LR Lesson-->
+                    <div class="control-group">
+                        <label class="control-label">Fənnin adı</label>
+                        <div class="controls">
+                            <select id="lessons" data-rel="chosen" name="LRModel.LessonId">
+                                @foreach (var m in Model.LessonModels)
+                                {
+                                    <option @m.Selected value="@m.Model.Id">@m.Model.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <!--LR Teacher-->
+                    <div class="control-group">
+                        <label class="control-label">Fənni tədris edən müəllim</label>
+                        <div id="teachers" class="controls">
+                            <select id="ModelTeacherId" data-rel="chosen" name="LRModel.TeacherId">
+                                @foreach (var m in Model.TeacherModels)
+                                {
+                                    <option @m.Selected value="@m.Model.Id">@m.Model.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <!--LR Week-->
+                    <div class="control-group">
+                        <label class="control-label">Həftə(Alt/Üst)</label>
+                        <div class="controls">
+                            <select id="ModelWeekId" data-rel="chosen" name="LRModel.WeekId">
+                                @foreach (var m in Model.WeekModels)
+                                {
+                                    <option @m.Selected value="@m.Model.Id">@m.Model.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <!--LR Day-->
+                    <div class="control-group">
+                        <label class="control-label">Gün</label>
+                        <div class="controls">
+                            <select id="ModelDayId" data-rel="chosen" name="LRModel.DayId">
+                                @foreach (var m in Model.DayModels)
+                                {
+                                    <option @m.Selected value="@m.Model.Id">@m.Model.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <!--LR Hour-->
+                    <div class="control-group">
+                        <label class="control-label">Saat</label>
+                        <div class="controls">
+                            <select id="ModelHourId" data-rel="chosen" name="LRModel.HourId">
+                                @foreach (var m in Model.HourModels)
+                                {
+                                    <option @m.Selected value="@m.Model.Id">@m.Model.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-primary" onclick="Save()">Yadda Saxla</button>
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+
+@Html.Partial("_ErrorMessage");

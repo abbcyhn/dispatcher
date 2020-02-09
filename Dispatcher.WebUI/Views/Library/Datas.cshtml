@@ -1,0 +1,6 @@
+﻿<select id="@Model.Id" name="@Model.Name" class="@Model.Class">
+    @foreach (var m in Model.Models)
+    {
+        <option value="@m.Id">@m</option>
+    }
+</select>

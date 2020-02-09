@@ -1,0 +1,107 @@
+﻿@using Dispatcher.WebUI.Models.Teacher
+@model TeacherAddOrEditModel
+
+@{
+    ViewBag.Title = "Müəllim(ə)lər";
+    ViewBag.BackUrlVisibility = true;
+    ViewBag.BackUrl = Url.Action("Index", "Teacher");
+}
+
+@section Scripts{
+    <script src="~/Content/Scripts/validations/teachervalidation.js"></script>
+}
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-content">
+            <form id="teacherForm" class="form-horizontal" action="@Model.PostUrl" method="post">
+                <fieldset>
+                    <!--Teacher Id-->
+                    <input name="TeacherModel.Id" value="@Model.Teacher.Id" hidden class="hide" />
+
+                    <!--Teacher Name-->
+                    <div class="control-group">
+                        <label class="control-label" for="focusedInput">Müəllim(ə)in adı</label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" type="text" name="TeacherModel.Name" value="@Model.Teacher.Name">
+                        </div>
+                    </div>
+
+                    <!--Teacher Surname-->
+                    <div class="control-group">
+                        <label class="control-label" for="focusedInput">Müəllim(ə)in soyadı</label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" type="text" name="TeacherModel.Surname" value="@Model.Teacher.Surname">
+                        </div>
+                    </div>
+
+                    <!--Teacher Patronymic-->
+                    <div class="control-group">
+                        <label class="control-label" for="focusedInput">Müəllim(ə)in ata adı</label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" type="text" name="TeacherModel.Patronymic" value="@Model.Teacher.Patronymic">
+                        </div>
+                    </div>
+
+                    <!--Teacher Academic Degrees-->
+                    <div class="control-group">
+                        <label class="control-label" for="selectError1">Müəllimin elmi dərəcəsi</label>
+                        <div class="controls">
+                            <select id="teachers" data-rel="chosen" multiple="multiple" name="TeacherModel.AcademicDegreeIds[]">
+                                @foreach (var tm in Model.AcademicDegreeModels)
+                                {
+                                    <option @tm.Selected value="@tm.Model.Id">@tm.Model.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <!--Lesson Lecture Rooms-->
+                    <div class="control-group">
+                        <label class="control-label" for="selectError1">Mühazirə otağı</label>
+                        <div class="controls">
+                            <select data-rel="chosen" name="TeacherModel.LectureRoomId">
+                                @foreach (var lr in Model.LectureRoomModels)
+                                {
+                                    <option @lr.Selected value="@lr.Model.Id">@lr.Model.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <!--Lesson Counsel Rooms-->
+                    <div class="control-group">
+                        <label class="control-label" for="selectError1">Məsləhət otağı</label>
+                        <div class="controls">
+                            <select data-rel="chosen" name="TeacherModel.CounselRoomId">
+                                @foreach (var cr in Model.CounselRoomModels)
+                                {
+                                    <option @cr.Selected value="@cr.Model.Id">@cr.Model.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <!--Lesson Counsel Hours-->
+                    <div class="control-group">
+                        <label class="control-label" for="selectError1">Məsləhət saatı</label>
+                        <div class="controls">
+                            <select data-rel="chosen" name="TeacherModel.CounselHourId">
+                                @foreach (var ch in Model.CounselHourModels)
+                                {
+                                    <option @ch.Selected value="@ch.Model.Id">@ch.Model.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Yadda Saxla</button>
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+</div>

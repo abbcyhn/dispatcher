@@ -1,0 +1,59 @@
+﻿@using Dispatcher.WebUI.Models.Lesson
+@model LessonAddOrEditModel
+
+@{
+    ViewBag.Title = "Fənnlər";
+
+    ViewBag.BackUrlVisibility = true;
+    ViewBag.BackUrl = Url.Action("Index", "Lesson");
+}
+
+@section Scripts{
+    <script src="~/Content/Scripts/validations/lessonvalidation.js"></script>
+}
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-content">
+            <form id="lessonForm" class="form-horizontal" action="@Model.PostUrl" method="post">
+                <fieldset>
+                    <!--Lesson Id-->
+                    <input name="LessonModel.Id" value="@Model.Lesson.Id" hidden class="hide"/>
+
+                    <!--Lesson Name-->
+                    <div class="control-group">
+                        <label class="control-label" for="focusedInput">Fənnin adı</label>
+                        <div class="controls">
+                            <input id="focusedInput" class="input-xlarge focused" type="text" name="LessonModel.Name" value="@Model.Lesson.Name">
+                        </div>
+                    </div>
+
+                    <!--Lesson Description-->
+                    <div class="control-group hidden-phone">
+                        <label class="control-label" for="textarea2">Fənnin məqsədi</label>
+                        <div class="controls">
+                            <textarea id="textarea2" rows="3" name="LessonModel.Description">@Model.Lesson.Description</textarea>
+                        </div>
+                    </div>
+
+                    <!--Lesson Teachers-->
+                    <div class="control-group">
+                        <label class="control-label" for="selectError1">Fənni tədris edən müəllim(ə)lər</label>
+                        <div class="controls">
+                            <select id="teachers" data-rel="chosen" multiple="multiple" name="LessonModel.TeacherIds[]">
+                                @foreach (var tm in Model.TeacherModels)
+                                {
+                                    <option @tm.Selected value="@tm.Model.Id">@tm.Model.Name @tm.Model.Surname</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Yadda Saxla</button>
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+</div>

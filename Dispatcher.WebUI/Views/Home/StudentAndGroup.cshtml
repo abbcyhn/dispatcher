@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Qruplar və Tələbələr";
+    ViewBag.BackUrlVisibility = true;
+    ViewBag.BackUrl = Url.Action("Index", "Home");
+}
+
+
+
+<div class="row-fluid">
+    <a class="quick-button metro blue span6" href="@Url.Action("Index", "Group")">
+        <img src="~/Content/Images/group.png" class="white-icon" />
+        <p>QRUPLAR</p>
+    </a>
+    <a class="quick-button metro blue span6" href="@Url.Action("Index", "Student")">
+        <img src="~/Content/Images/student.png" class="white-icon" />
+        <p>TƏLƏBƏLƏR</p>
+    </a>
+
+    <div class="clearfix"></div>
+</div>

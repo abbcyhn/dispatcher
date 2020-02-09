@@ -1,0 +1,74 @@
+﻿@using Dispatcher.WebUI.Models.Room
+@model RoomAddOrEditModel
+
+@{
+    ViewBag.Title = "Otaqlar";
+
+    ViewBag.BackUrlVisibility = true;
+    ViewBag.BackUrl = Url.Action("Index", "Room");
+}
+
+@section Scripts{
+    <script src="~/Content/Scripts/validations/roomvalidation.js"></script>
+}
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-content">
+            <form id="roomForm" class="form-horizontal" action="@Model.PostUrl" method="post">
+                <fieldset>
+                    <!--Room Id-->
+                    <input name="RoomModel.Id" value="@Model.Room.Id" hidden class="hide" />
+
+                    <!--Room Name-->
+                    <div class="control-group">
+                        <label class="control-label">Otağın adı</label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" type="text" name="RoomModel.Name" value="@Model.Room.Name">
+                        </div>
+                    </div>
+
+                    <!--Room Type-->
+                    <div class="control-group">
+                        <label class="control-label">Otağın növü</label>
+                        <div class="controls">
+                            <select data-rel="chosen" name="RoomModel.RoomTypeId">
+                                @foreach (var bm in Model.RoomTypeModels)
+                                {
+                                    <option @bm.Selected value="@bm.Model.Id">@bm.Model.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <!--Room Capacity-->
+                    <div class="control-group">
+                        <label class="control-label">Tələbə tutumu</label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" type="text" name="RoomModel.Capacity" value="@Model.Room.Capacity">
+                        </div>
+                    </div>
+
+
+                    <!--Room Building-->
+                    <div class="control-group">
+                        <label class="control-label">Yerləşdiyi korpus</label>
+                        <div class="controls">
+                            <select data-rel="chosen" name="RoomModel.BuildingId">
+                                @foreach (var bm in Model.BuildingModels)
+                                {
+                                    <option @bm.Selected value="@bm.Model.Id">@bm.Model.Description</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Yadda Saxla</button>
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+</div>

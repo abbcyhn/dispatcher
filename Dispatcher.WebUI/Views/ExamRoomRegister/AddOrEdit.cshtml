@@ -1,0 +1,103 @@
+﻿@using Dispatcher.WebUI.Models.ExamRoomRegister
+@model ERRegisterAddOrEditModel
+
+@{
+    ViewBag.Title = "İmtahan otaqları reyestri";
+
+    ViewBag.BackUrlVisibility = true;
+    ViewBag.BackUrl = Url.Action("Index", "ExamRoomRegister");
+}
+
+@section Scripts{
+    <script>
+        $.ajaxSettings.traditional = true;
+        var teachersUrl = '@Url.Action("GetTeachers", "Library")';
+        var roomsUrl = '@Url.Action("GetAvailableRooms", "Library")';
+        var isRoomAndTeacherAvailableUrl = '@Url.Action("IsRoomAndTeacherAvailableForER", "Library")';
+    </script>
+    @Scripts.Render("~/Content/Scripts/ExamRoomRegisterScripts")
+}
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-content">
+            <form id="erForm" class="form-horizontal" action="@Model.PostUrl" method="post">
+                <fieldset>
+                    <!--LR Id-->
+                    <input id="ModelId" name="LRModel.Id" value="@Model.ERRegister.Id" hidden class="hide" />
+
+                    <!--LR Group-->
+                    <div id="groups_chzn_main" class="control-group">
+                        <label class="control-label">Qruplar</label>
+                        <div class="controls">
+                            <select id="groups" data-rel="chosen" multiple="multiple" name="LRModel.GroupIds[]">
+                                @foreach (var m in Model.GroupModels)
+                                {
+                                    <option @m.Selected value="@m.Model.Id">@m.Model.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <!--LR Room-->
+                    <div class="control-group">
+                        <label class="control-label">İmtahan otağı</label>
+                        <div id="rooms" class="controls">
+                            <select id="ModelRoomId" data-rel="chosen" name="LRModel.RoomId">
+                                @foreach (var m in Model.RoomModels)
+                                {
+                                    <option @m.Selected value="@m.Model.Id">@m.Model.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <!--LR Teacher-->
+                    <div id="teachers_chzn_main" class="control-group">
+                        <label class="control-label">Nəzarətçilər</label>
+                        <div class="controls">
+                            <select id="teachers" data-rel="chosen" multiple="multiple" name="LRModel.SupervisiorIds[]">
+                                @foreach (var m in Model.SupervisiorModels)
+                                {
+                                    <option @m.Selected value="@m.Model.Id">@m.Model</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <!--LR Exam Date-->
+                    <div class="control-group">
+                        <label class="control-label">Tarix</label>
+                        <div class="controls">
+                            <input id="ModelExamDateId" name="LRModel.ExamDate" value="@Model.ExamDate" type="text" />
+                        </div>
+                    </div>
+
+
+                    <!--LR Hour-->
+                    <div class="control-group">
+                        <label class="control-label">Saat</label>
+                        <div class="controls">
+                            <select id="ModelHourId" data-rel="chosen" name="LRModel.HourId">
+                                @foreach (var m in Model.HourModels)
+                                {
+                                    <option @m.Selected value="@m.Model.Id">@m.Model.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-primary" onclick="Save()">Yadda Saxla</button>
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+
+@Html.Partial("_ErrorMessage");
