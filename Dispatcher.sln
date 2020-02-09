@@ -19,6 +19,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{1BD7CC4B-9BFD-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dispatcher.WebUI", "Dispatcher.WebUI\Dispatcher.WebUI.csproj", "{BB3B6B3D-7CA0-4328-A47C-53BAD07C0D6E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{011025C0-B613-4FED-B353-B32C3EC4EB58}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,5 +60,8 @@ Global
 		{0D7C6DCF-824E-481B-9F8D-0AB23D75D427} = {0064B53C-B324-4221-AA76-209BAA14B3E0}
 		{E58039A7-B825-4073-8F1D-1053261DBD67} = {53009658-8829-40E1-97CE-C0B455823BA4}
 		{BB3B6B3D-7CA0-4328-A47C-53BAD07C0D6E} = {1BD7CC4B-9BFD-4790-BA67-A5930C673B88}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {88617CBB-A135-4023-A86B-DB23610BB7B7}
 	EndGlobalSection
 EndGlobal
